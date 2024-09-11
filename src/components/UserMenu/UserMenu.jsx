@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { selectAuthUser } from "../../redux/auth/authSelectors";
-import { apiLogout } from "../../redux/auth/authOperations";
-import { clearContacts } from "../../redux/contacts/contactsSlice";
-import css from "./UserMenu.module.css"
+import { selectAuthUser } from "../../redux/auth/selectors";
+import { apiLogout } from "../../redux/auth/operations";
+import { clearContacts } from "../../redux/contacts/slice";
+import css from "./UserMenu.module.css";
 const UserMenu = () => {
 	const dispatch = useDispatch();
 	const user = useSelector(selectAuthUser);

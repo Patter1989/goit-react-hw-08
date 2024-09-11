@@ -1,10 +1,9 @@
-import css from "./ContactForm.module.css"
-import { ErrorMessage, Field, Form, Formik } from "formik"
+import css from "./ContactForm.module.css";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useDispatch } from "react-redux";
 import * as Yup from "yup";
-import { apiAddContacts } from "../../redux/contacts/contactsOperations";
+import { apiAddContacts } from "../../redux/contacts/operations";
 import toast from "react-hot-toast";
-
 
 const ContactValidationSchema = Yup.object().shape({
 	contactName: Yup.string()
@@ -26,55 +25,53 @@ const ContactForm = () => {
 		const contactObj = {
 			name: values.contactName,
 			number: values.contactNumber,
-		}
-		dispatch(apiAddContacts(contactObj))
-			.then(() => {
-				toast.success(`Contact ${contactObj.name} added successfully`);
-			});
+		};
+		dispatch(apiAddContacts(contactObj)).then(() => {
+			toast.success(`Contact ${contactObj.name} added successfully`);
+		});
 		actions.resetForm();
-	}
-	
+	};
+
 	return (
 		<Formik
 			initialValues={INITIAL_VALUES}
 			onSubmit={handleSubmit}
 			validationSchema={ContactValidationSchema}
 		>
-			
-					<Form className={css.form}>
-						<p>Name</p>
-						<label className={css.label}>
-							<Field
-								type='text'
-								name='contactName'
-								
-							/>
-							<ErrorMessage className={css.errorText}
-								name='contactName'
-								component='span'
-							/>
-						</label>
-						<p>Number</p>
-						<label className={css.label}>
-							<Field
-								type='tel'
-								name='contactNumber'
-								
-							/>
-							<ErrorMessage className={css.errorText}
-								name='contactNumber'
-								component='span'
-							/>
-						</label>
-						<button
-							type='submit'
-							className={css.addContactBtn}
-						>
-							✌️Add contact✌️
-						</button>
-					</Form>			
+			<Form className={css.form}>
+				<p>Name</p>
+				<label className={css.label}>
+					<Field
+						type='text'
+						name='contactName'
+					/>
+					<ErrorMessage
+						className={css.errorText}
+						name='contactName'
+						component='span'
+					/>
+				</label>
+				<p>Number</p>
+				<label className={css.label}>
+					<Field
+						type='tel'
+						name='contactNumber'
+					/>
+					<ErrorMessage
+						className={css.errorText}
+						name='contactNumber'
+						component='span'
+					/>
+				</label>
+				<button
+					type='submit'
+					className={css.addContactBtn}
+				>
+					✌️Add contact✌️
+				</button>
+			</Form>
 		</Formik>
 	);
-}
+};
 
-export default ContactForm
+export default ContactForm;

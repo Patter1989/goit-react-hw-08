@@ -3,12 +3,13 @@ import { Toaster } from "react-hot-toast";
 import { lazy, Suspense, useEffect } from "react";
 import { ProgressBar } from "react-loader-spinner";
 import { useDispatch, useSelector } from "react-redux";
-import { apiRefreshUser } from "./redux/auth/authOperations";
-import { selectAuthIsRefreshing } from "./redux/auth/authSelectors";
+import { selectAuthIsRefreshing } from "./redux/auth/selectors";
 import Layout from "./components/Layout/Layout";
 import { RestrictedRoute } from "./components/RestrictedRoute";
 import { ProtectedRoute } from "./components/ProtectedRoute";
-import css from "./App.module.css"
+import css from "./App.module.css";
+import { apiRefreshUser } from "./redux/auth/operations";
+
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
 const ContactsPage = lazy(() => import("./pages/ContactsPage/ContactsPage"));

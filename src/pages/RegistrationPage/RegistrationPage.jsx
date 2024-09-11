@@ -1,9 +1,9 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
-import * as Yup from "yup"; 
-import css from "./RegistrationPage.module.css"
+import * as Yup from "yup";
+import css from "./RegistrationPage.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { apiRegister } from "../../redux/auth/authOperations";
-import { selectAuthError } from "../../redux/auth/authSelectors";
+import { apiRegister } from "../../redux/auth/Operations";
+import { selectAuthError } from "../../redux/auth/selectors";
 
 const RegisterValidationSchema = Yup.object().shape({
 	name: Yup.string()
@@ -21,7 +21,7 @@ const RegisterValidationSchema = Yup.object().shape({
 });
 
 const RegistrationPage = () => {
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 	const error = useSelector(selectAuthError);
 	const INITIAL_VALUES = {
 		name: "",
@@ -30,10 +30,10 @@ const RegistrationPage = () => {
 	};
 
 	const handleSubmit = (values) => {
-		dispatch(apiRegister(values))
+		dispatch(apiRegister(values));
 		// onSearch(values.searchTerm)
-	}
-	
+	};
+
 	return (
 		<Formik
 			initialValues={INITIAL_VALUES}

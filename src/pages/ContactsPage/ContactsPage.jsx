@@ -1,10 +1,10 @@
-import { useEffect} from "react";
+import { useEffect } from "react";
 import Section from "../../components/Section/Section.jsx";
 import ContactForm from "../../components/ContactForm/ContactForm.jsx";
 import ContactList from "../../components/ContactList/ContactList.jsx";
 import SearchBox from "../../components/SearchBox/SearchBox.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { apiFetchContacts } from "../../redux/contacts/contactsOperations.js";
+import { apiFetchContacts } from "../../redux/contacts/operations.js";
 import Loader from "../../components/Loader/loader.jsx";
 import css from "./ContactsPage.module.css";
 
@@ -32,6 +32,5 @@ const ContactsPage = () => {
 		</div>
 	);
 };
-
 
 export default ContactsPage;

@@ -1,12 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit"
-import { apiAddContacts, apiDeleteContacts, apiFetchContacts } from "../contacts/contactsOperations";
-
+import { createSlice } from "@reduxjs/toolkit";
+import {
+	apiAddContacts,
+	apiDeleteContacts,
+	apiFetchContacts,
+} from "./operations";
 
 const INITIAL_STATE = {
-		items: [],
-		loading: false,
-		error: null,
-
+	items: [],
+	loading: false,
+	error: null,
 };
 
 const contactSlice = createSlice({
@@ -59,9 +61,5 @@ const contactSlice = createSlice({
 			}),
 });
 
-
 export const ContactsReducer = contactSlice.reducer;
-export const { clearContacts} = contactSlice.actions
-
-
-
+export const { clearContacts } = contactSlice.actions;

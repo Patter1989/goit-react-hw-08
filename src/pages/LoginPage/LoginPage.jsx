@@ -2,8 +2,8 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import css from "./LoginPage.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { apiLogin } from "../../redux/auth/authOperations";
-import { selectAuthError } from "../../redux/auth/authSelectors";
+import { apiLogin } from "../../redux/auth/operations";
+import { selectAuthError } from "../../redux/auth/selectors";
 
 const LoginValidationSchema = Yup.object().shape({
 	password: Yup.string()
@@ -17,8 +17,8 @@ const LoginValidationSchema = Yup.object().shape({
 });
 
 const LoginPage = () => {
-  const dispatch = useDispatch();
-  const error = useSelector(selectAuthError);
+	const dispatch = useDispatch();
+	const error = useSelector(selectAuthError);
 	const INITIAL_VALUES = {
 		email: "",
 		password: "",
