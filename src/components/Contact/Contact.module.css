@@ -1,0 +1,27 @@
+ul{
+  list-style: none;
+  padding: 0;
+}
+.contactWrapper{
+  width: 186px;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contactItem{
+  font-size: 14px;
+  display: flex;
+  gap: 3px;
+
+  justify-content: flex-start;
+  align-items: center;
+}
+.contactBtn{
+margin-left: 5px;
+}

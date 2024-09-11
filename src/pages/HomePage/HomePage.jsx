@@ -1,30 +1,19 @@
-import { useEffect, useState } from 'react';
-import { requestTopMoviesList } from '../../services/api';
-import toast from 'react-hot-toast';
-import MovieList from '../../components/MovieList/MovieList';
-import css from "./HomePage.module.css"
 
-function HomePage() {
+import css from "./HomePage.module.css";
 
-	const [topRatedMovies, setTopRatedMovies] = useState([]);
-	useEffect(() => {
-		async function fetchTopRatedMovies() {
-			try {
-				const response = await requestTopMoviesList();
-				setTopRatedMovies(response.data.results);
-			} catch (err) {
-				toast.error(`Error fetching movies: ${err.message}`);
-			} 
-		}
-		fetchTopRatedMovies();
-	}, []);
-
+const HomePage = () => {
 	return (
-		<div className={css.HomePageWrapper}>
-			<h2 className={css.header}>Trending today</h2>
-			<MovieList moviesList={topRatedMovies} />
+		<div className={css.wrapper}>
+			<header className={css.header}>
+				<h1>Welcome to Our Website</h1>
+			</header>
+			<div className='container'>
+				<section className={css.section}>
+					<h2>Contactbook App</h2>
+				</section>
+			</div>
 		</div>
 	);
-}
+};
 
-export default HomePage
+export default HomePage;

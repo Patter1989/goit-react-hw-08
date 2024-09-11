@@ -1,74 +1,76 @@
 import { Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { ProgressBar } from "react-loader-spinner";
+import { useDispatch, useSelector } from "react-redux";
+import { apiRefreshUser } from "./redux/auth/authOperations";
+import { selectAuthIsRefreshing } from "./redux/auth/authSelectors";
+import Layout from "./components/Layout/Layout";
+import { RestrictedRoute } from "./components/RestrictedRoute";
+import { ProtectedRoute } from "./components/ProtectedRoute";
+import css from "./App.module.css"
 
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
-const MoviesPage = lazy(() => import("./pages/MoviesPage/MoviesPage"));
-const MovieDetailsPage = lazy(() =>
-	import("./pages/MovieDetailsPage/MovieDetailsPage")
+const ContactsPage = lazy(() => import("./pages/ContactsPage/ContactsPage"));
+const RegistrationPage = lazy(() =>
+	import("./pages/RegistrationPage/RegistrationPage")
 );
-const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
-const Navigation = lazy(() => import("./components/Navigation/Navigation"));
-const MovieCast = lazy(() => import("./components/MovieCast/MovieCast"));
-const MovieReview = lazy(() => import("./components/MovieReviews/MovieReview"));
-
+const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
 
 const App = () => {
-	
+	const isRefreshing = useSelector(selectAuthIsRefreshing);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(apiRefreshUser());
+	}, [dispatch]);
+
+	if (isRefreshing) return <p>Please wait...</p>;
+
 	return (
-		<div>
-			<header>
-				<Navigation />
-			</header>
-			<main>
-				<Toaster
-					position='top-center'
-					containerStyle={{
-						top: 40,
-						left: 20,
-						bottom: 20,
-						right: 20,
-					}}
-					toastOptions={{
-						style: {
-							color: "red",
-							backgroundColor: "rgb(119, 118, 118)",
-						},
-					}}
-				/>
-				<Suspense fallback= {<ProgressBar/>}>
-					<Routes>
+		<div className={css.app}>
+			<Toaster
+				position='top-center'
+				containerStyle={{
+					top: 40,
+					left: 20,
+					bottom: 20,
+					right: 20,
+				}}
+				toastOptions={{
+					style: {
+						color: "red",
+						backgroundColor: "rgb(119, 118, 118)",
+					},
+				}}
+			/>
+			<Suspense fallback={<ProgressBar />}>
+				<Routes>
+					<Route
+						path='/'
+						element={<Layout />}
+					>
 						<Route
-							path='/'
+							index
 							element={<HomePage />}
 						/>
 						<Route
-							path='/movies'
-							element={<MoviesPage />}
+							path='/contacts'
+							element={<ProtectedRoute component={<ContactsPage />} />}
 						/>
 						<Route
-							path='/movies/:topRatedMovieId'
-							element={<MovieDetailsPage />}
-						>
-							<Route
-								path='cast'
-								element={<MovieCast />}
-							/>
-							<Route
-								path='reviews'
-								element={<MovieReview />}
-							/>
-						</Route>
-						<Route
-							path='*'
-							element={<NotFoundPage />}
+							path='/register'
+							element={<RestrictedRoute component={<RegistrationPage />} />}
 						/>
-					</Routes>
-				</Suspense>
-			</main>
+						<Route
+							path='/login'
+							element={<RestrictedRoute component={<LoginPage />} />}
+						/>
+					</Route>
+				</Routes>
+			</Suspense>
 		</div>
 	);
-}
+};
 
-export default App
+export default App;
