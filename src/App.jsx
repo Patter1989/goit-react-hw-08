@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectAuthIsRefreshing } from "./redux/auth/selectors";
 import Layout from "./components/Layout/Layout";
 import { RestrictedRoute } from "./components/RestrictedRoute";
-import { ProtectedRoute } from "./components/ProtectedRoute";
+import { PrivateRoute } from "./components/PrivateRoute";
 import css from "./App.module.css";
 import { apiRefreshUser } from "./redux/auth/operations";
 
@@ -57,7 +57,7 @@ const App = () => {
 						/>
 						<Route
 							path='/contacts'
-							element={<ProtectedRoute component={<ContactsPage />} />}
+							element={<PrivateRoute component={<ContactsPage />} />}
 						/>
 						<Route
 							path='/register'
